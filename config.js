@@ -19,7 +19,7 @@ window.WEDDING = {
   place: {
     name: 'Naše zahrada & stodola',
     address: 'Lhenice 45, 415 01 Teplice',
-    mapUrl: 'https://mapy.cz/',
+    mapUrl: 'https://mapy.com/en/turisticka?q=lhenice%2045%20teplice&source=addr&id=11279100&ds=2&x=13.8648222&y=50.5748057&z=17',
     note: 'Parkovat se dá přímo u domu, případně cca 2min. pěšky u rybníka.',
   },
 
