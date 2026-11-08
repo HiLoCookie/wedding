@@ -45,7 +45,8 @@ window.WEDDING = {
   // Ikonky v programu: názvy souborů ze složky assets/icons (bez .png), např.
   // sakura, obrad, foto, ramen, dort, lampiony, dorazim, daruma, maneki, check
 
-  // Fotky – soubory jsou ve složce assets/photos.
+  // Fotky na hlavní stránce – soubory jsou ve složce assets/photos.
+  // Všechny fotky (galerie.html) jsou v assets/gallery a seznam v gallery-data.js.
   // pos = která část fotky má zůstat vidět při ořezu (např. 'top', 'center 30%')
   photos: {
     couple: [
@@ -58,16 +59,12 @@ window.WEDDING = {
       { src: 'assets/photos/japonsko-zahrada.webp', caption: 'Až se tam vrátíme 🌿' },
       { src: 'assets/photos/my-vecer.webp', caption: '', pos: 'center 30%' },
     ],
-    // TODO: doplňte jména mazlíčků
+    // Mazlíčci – kartička odkazuje do galerie (tag = filtr v galerii: loki, himiko, psi)
     pets: [
-      { src: 'assets/photos/kocka-siam.webp', name: 'Jméno kočičky', caption: 'ty modré oči…' },
-      { src: 'assets/photos/kocka-seda-kosik.webp', name: 'Jméno kočičky', caption: 'v košíku je nejlíp' },
-      { src: 'assets/photos/kocka-siam-plysak.webp', name: '', caption: 's plyšovým parťákem' },
-      { src: 'assets/photos/kocka-seda-kotatko.webp', name: '', caption: 'jako kotě' },
-      { src: 'assets/photos/kocka-seda-mlsna.webp', name: '', caption: 'mlsoun' },
-      { src: 'assets/photos/tomas-kocka.webp', name: '', caption: 'Tomáš a kočičí mazlení', pos: 'top' },
-      { src: 'assets/photos/psi-dva.webp', name: 'Jména pejsků', caption: '' },
-      { src: 'assets/photos/pes-slunce.webp', name: '', caption: 'odpočinek na sluníčku' },
+      { name: 'Loki', alias: 'Bobíček · Bobík · Bobo · Bobokun', src: 'assets/photos/kocka-seda-kosik.webp', tag: 'loki' },
+      { name: 'Himiko', alias: 'Himomímo · Bibiko · Bibičko · Bíba', src: 'assets/photos/kocka-siam.webp', tag: 'himiko' },
+      { name: 'Lucky', alias: '', src: 'assets/photos/pes-slunce.webp', tag: 'psi' },
+      { name: 'Dusty', alias: '', src: 'assets/photos/pes-dusty.webp', tag: 'psi' },
     ],
     banner: 'assets/photos/banner-torii.webp',
   },

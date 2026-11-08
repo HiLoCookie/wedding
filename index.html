@@ -21,6 +21,7 @@
     <a href="#info">Info</a>
     <a href="#rsvp" class="nav-cta">RSVP</a>
     <a href="#dary">Dary</a>
+    <a href="galerie.html">Fotky</a>
   </nav>
 
   <!-- ===================== ÚVOD ===================== -->
@@ -61,13 +62,14 @@
     <section class="section wide" id="my">
       <h2 class="title"><span class="jp">私たち</span>To jsme my</h2>
       <div class="polaroids" data-gallery="couple"></div>
+      <p class="center more"><a class="btn btn-ghost" href="galerie.html">Prohlédnout všechny fotky <span data-photo-count></span> →</a></p>
     </section>
 
     <!-- ===================== MAZLÍČCI ===================== -->
     <section class="section paper wide" id="mazlicci">
       <h2 class="title"><img class="title-icon" src="assets/icons/maneki.png" alt="" width="64" height="64"><span class="jp">家族</span>A naše chlupatá rodina</h2>
-      <p class="center muted">Bez nich by to nebylo ono. 🐾</p>
-      <div class="polaroids pets" data-gallery="pets"></div>
+      <p class="center muted">Bez nich by to nebylo ono. 🐾 Klikněte na mazlíčka a uvidíte všechny jeho fotky.</p>
+      <div class="polaroids pets" data-pets></div>
     </section>
 
     <!-- ===================== PROGRAM ===================== -->
@@ -230,14 +232,6 @@
     </section>
   </main>
 
-  <!-- lightbox pro fotky -->
-  <dialog class="lightbox" id="lightbox">
-    <button class="lb-close" type="button" aria-label="Zavřít">×</button>
-    <button class="lb-prev" type="button" aria-label="Předchozí">‹</button>
-    <figure><img alt=""><figcaption></figcaption></figure>
-    <button class="lb-next" type="button" aria-label="Další">›</button>
-  </dialog>
-
   <footer class="footer">
     <img src="assets/hanko.svg" alt="" width="56" height="56">
     <p>Dotazy? Napište nám na <a data-contact href="#">—</a></p>
@@ -246,6 +240,8 @@
 
   <script src="assets/qrcode.js"></script>
   <script src="config.js"></script>
+  <script src="gallery-data.js"></script>
+  <script src="lightbox.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

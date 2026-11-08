@@ -281,7 +281,30 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
 }
 .polaroid figcaption b { display: block; font-size: 18px; }
 .polaroid figcaption span { color: var(--sumi-soft); font-size: 15px; }
-.pets .polaroid img { aspect-ratio: 1; }
+.pets .polaroid img { aspect-ratio: 1; display: block; width: 100%; object-fit: cover; }
+.polaroid.pet { display: block; color: inherit; text-decoration: none; }
+.pet .alias { display: block; font-size: 14px; font-style: italic; }
+.pet .pet-more { display: inline-block; margin-top: 6px; font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--shu); }
+.more { margin-top: 36px; }
+
+/* ============ Galerie ============ */
+.gallery-page .title { margin-top: 10px; }
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 24px 0 28px; }
+.filters button {
+  font: 600 15px var(--sans); color: var(--sumi); cursor: pointer;
+  padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--kraft); background: #fffdf8;
+}
+.filters button small { color: var(--sumi-soft); font-weight: 400; }
+.filters button[aria-selected=true] { background: var(--shu); border-color: var(--shu); color: var(--washi); }
+.filters button[aria-selected=true] small { color: var(--washi); opacity: .8; }
+.masonry { columns: 4 240px; column-gap: 14px; }
+.m-item {
+  display: block; width: 100%; margin: 0 0 14px; padding: 6px; border: 0; cursor: zoom-in;
+  background: #fffdf8; box-shadow: 0 6px 16px rgba(43,38,34,.1); break-inside: avoid;
+  transition: transform .2s;
+}
+.m-item:hover { transform: translateY(-3px); }
+.m-item img { display: block; width: 100%; height: auto; background: var(--washi-2); }
 
 /* ============ Banner torii ============ */
 .banner {
@@ -302,7 +325,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
 }
 .lightbox::backdrop { background: rgba(20, 16, 14, .88); }
 .lightbox figure { margin: 0; text-align: center; }
-.lightbox img { display: block; max-width: 92vw; max-height: 84vh; margin: 0 auto; border: 8px solid #fffdf8; border-radius: 4px; }
+.lightbox img { display: block; max-width: 92vw; max-height: 84vh; min-width: min(80vw, 480px); object-fit: contain; background: #fffdf8; margin: 0 auto; border: 8px solid #fffdf8; border-radius: 4px; }
 .lightbox figcaption { color: var(--washi); font-family: var(--serif); margin-top: 10px; min-height: 1.4em; }
 .lightbox button {
   position: fixed; z-index: 2; width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer;
@@ -354,6 +377,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
   .polaroid figcaption span { font-size: 13px; }
   .polaroid::before { width: 56px; height: 18px; top: -9px; }
   .banner { min-height: 300px; }
+  .masonry { columns: 2; column-gap: 8px; }
+  .m-item { padding: 4px; margin-bottom: 8px; }
   .hero-vertical { display: none; }
   .field-row .field-narrow { max-width: none; }
 }

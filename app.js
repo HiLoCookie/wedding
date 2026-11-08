@@ -31,41 +31,37 @@
     <li><time>${esc(i.time)}</time>${i.icon ? `<img class="tl-icon" src="assets/icons/${esc(i.icon)}.png" alt="" width="40" height="40">` : '<span class="tl-dot"></span>'}<div><h3>${esc(i.title)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ''}</div></li>`).join('');
 
   // ---------- fotky (polaroidy + lightbox) ----------
-  const galleries = {};
-  $$('[data-gallery]').forEach(box => {
-    const list = (C.photos && C.photos[box.dataset.gallery]) || [];
-    galleries[box.dataset.gallery] = list;
-    box.innerHTML = list.map((p, i) => `
-      <figure class="polaroid" style="--tilt:${[-3, 2, -1.5, 3, -2.5, 1.5][i % 6]}deg">
-        <button type="button" data-open="${box.dataset.gallery}:${i}" aria-label="Zvětšit fotku">
-          <img src="${esc(p.src)}" alt="${esc(p.alt || p.caption || p.name || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
-        </button>
-        ${p.name || p.caption ? `<figcaption>${p.name ? `<b>${esc(p.name)}</b>` : ''}${p.caption ? `<span>${esc(p.caption)}</span>` : ''}</figcaption>` : ''}
-      </figure>`).join('');
-  });
-  if (C.photos && C.photos.banner) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
-
-  const lb = $('#lightbox');
-  let lbList = [], lbIdx = 0;
-  function lbShow() {
-    const p = lbList[lbIdx];
-    $('img', lb).src = p.src;
-    $('img', lb).alt = p.alt || p.caption || p.name || '';
-    $('figcaption', lb).textContent = [p.name, p.caption].filter(Boolean).join(' – ');
-  }
-  document.addEventListener('click', e => {
+  const tilt = i => [-3, 2, -1.5, 3, -2.5, 1.5][i % 6];
+  const couple = (C.photos && C.photos.couple) || [];
+  const coupleBox = $('[data-gallery="couple"]');
+  coupleBox.innerHTML = couple.map((p, i) => `
+    <figure class="polaroid" style="--tilt:${tilt(i)}deg">
+      <button type="button" data-open="${i}" aria-label="Zvětšit fotku">
+        <img src="${esc(p.src)}" alt="${esc(p.caption || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+      </button>
+      ${p.caption ? `<figcaption><span>${esc(p.caption)}</span></figcaption>` : ''}
+    </figure>`).join('');
+  coupleBox.addEventListener('click', e => {
     const b = e.target.closest('[data-open]');
-    if (!b) return;
-    const [g, i] = b.dataset.open.split(':');
-    lbList = galleries[g]; lbIdx = +i; lbShow();
-    lb.showModal();
+    if (b) Lightbox.open(couple.map(p => ({ src: p.src, caption: p.caption })), +b.dataset.open);
   });
-  const step = d => { lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); };
-  $('.lb-prev', lb).onclick = () => step(-1);
-  $('.lb-next', lb).onclick = () => step(1);
-  $('.lb-close', lb).onclick = () => lb.close();
-  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
-  lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
+
+  // mazlíčci – kartička vede do galerie s filtrem
+  const G_ALL = window.GALLERY || [];
+  $$('[data-photo-count]').forEach(el => (el.textContent = G_ALL.length ? '(' + G_ALL.length + ')' : ''));
+  $('[data-pets]').innerHTML = ((C.photos && C.photos.pets) || []).map((p, i) => {
+    const n = G_ALL.filter(g => g.t.includes(p.tag)).length;
+    return `
+    <a class="polaroid pet" href="galerie.html#${esc(p.tag)}" style="--tilt:${tilt(i)}deg">
+      <img src="${esc(p.src)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+      <figcaption>
+        <b>${esc(p.name)}</b>
+        ${p.alias ? `<span class="alias">${esc(p.alias)}</span>` : ''}
+        ${n ? `<span class="pet-more">${n} fotek →</span>` : ''}
+      </figcaption>
+    </a>`;
+  }).join('');
+  if (C.photos && C.photos.banner) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
   // co s sebou
   $('[data-bring]').innerHTML = C.bring.map(b => `<li>${esc(b)}</li>`).join('');
 
