@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
   <div class="petals" aria-hidden="true"></div>
@@ -21,7 +21,6 @@
     <a href="#info">Info</a>
     <a href="#rsvp" class="nav-cta">RSVP</a>
     <a href="#dary">Dary</a>
-    <a href="galerie.html">Fotky</a>
   </nav>
 
   <!-- ===================== ÚVOD ===================== -->
@@ -62,14 +61,18 @@
     <section class="section wide" id="my">
       <h2 class="title"><span class="jp">私たち</span>To jsme my</h2>
       <div class="polaroids" data-gallery="couple"></div>
-      <p class="center more"><a class="btn btn-ghost" href="galerie.html">Prohlédnout všechny fotky <span data-photo-count></span> →</a></p>
+      <p class="center more"><button type="button" class="btn btn-ghost" data-more="couple" aria-expanded="false" aria-controls="couple-rest">Zobrazit zbytek fotek</button></p>
+      <div class="car-wrap" id="couple-rest" hidden></div>
     </section>
 
     <!-- ===================== MAZLÍČCI ===================== -->
     <section class="section paper wide" id="mazlicci">
       <h2 class="title"><img class="title-icon" src="assets/icons/maneki.png" alt="" width="64" height="64"><span class="jp">家族</span>A naše chlupatá rodina</h2>
-      <p class="center muted">Bez nich by to nebylo ono. 🐾 Klikněte na mazlíčka a uvidíte všechny jeho fotky.</p>
+      <p class="center muted">Bez nich by to nebylo ono. 🐾 Klikněte na mazlíčka a uvidíte další jeho fotky.</p>
       <div class="polaroids pets" data-pets></div>
+      <div class="car-wrap" id="pets-more" hidden></div>
+      <p class="center more"><button type="button" class="btn btn-ghost" data-more="pets" aria-expanded="false" aria-controls="pets-rest">Zobrazit zbytek fotek</button></p>
+      <div class="car-wrap" id="pets-rest" hidden></div>
     </section>
 
     <!-- ===================== PROGRAM ===================== -->
@@ -238,10 +241,10 @@
     <p class="muted small">ありがとう – děkujeme!</p>
   </footer>
 
-  <script src="assets/qrcode.js"></script>
-  <script src="config.js"></script>
-  <script src="gallery-data.js"></script>
-  <script src="lightbox.js"></script>
-  <script src="app.js"></script>
+  <script src="assets/qrcode.js?v=5"></script>
+  <script src="config.js?v=5"></script>
+  <script src="gallery-data.js?v=5"></script>
+  <script src="lightbox.js?v=5"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>

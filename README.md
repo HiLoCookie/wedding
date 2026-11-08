@@ -77,9 +77,12 @@ V tabulce v menu **💌 Svatba → Poslat mi přehled RSVP teď** si vyzkoušít
   (`couple` = sekce *To jsme my*, `pets` = *Chlupatá rodina*, `banner` = velký pruh před RSVP).
 - Novou fotku přidáte tak, že ji nahrajete do `assets/photos` a přidáte řádek do `config.js`.
   Ideálně ji předem zmenšete na max. ~1000 px (např. na [squoosh.app](https://squoosh.app)).
-- **Fotogalerie** (`galerie.html`) ukazuje všechny fotky ze složky `assets/gallery` (`thumb` = náhledy, `full` = velké).
-  Seznam fotek a jejich štítky (`my`, `japonsko`, `loki`, `himiko`, `psi`) jsou v `gallery-data.js` –
-  když je fotka ve špatné kategorii, stačí jí tam přepsat štítek. Kartičky mazlíčků vedou rovnou do galerie s filtrem.
+- **Ostatní fotky** se zobrazí po kliknutí na „Zobrazit zbytek fotek“ jako posuvný pás (carousel).
+  Jsou ve složce `assets/gallery` (`thumb` = náhledy, `full` = velké), seznam a štítky
+  (`my`, `japonsko`, `loki`, `himiko`, `kocky`, `psi`) jsou v `gallery-data.js` – když je fotka ve špatné
+  skupině, stačí jí přepsat štítek. Klik na mazlíčka ukáže fotky s jeho štítkem.
+- **Po každé úpravě souborů** zvyšte v `index.html` číslo verze `?v=5` (např. na `?v=6`),
+  jinak může prohlížeč hostů ještě chvíli používat starou verzi z mezipaměti.
 - Ikonky jsou v `assets/icons`, v programu dne se nastavují polem `icon` u každého bodu.
 
 ---

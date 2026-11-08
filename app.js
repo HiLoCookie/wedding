@@ -30,38 +30,125 @@
   $('[data-schedule]').innerHTML = C.schedule.map(i => `
     <li><time>${esc(i.time)}</time>${i.icon ? `<img class="tl-icon" src="assets/icons/${esc(i.icon)}.png" alt="" width="40" height="40">` : '<span class="tl-dot"></span>'}<div><h3>${esc(i.title)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ''}</div></li>`).join('');
 
-  // ---------- fotky (polaroidy + lightbox) ----------
-  const tilt = i => [-3, 2, -1.5, 3, -2.5, 1.5][i % 6];
-  const couple = (C.photos && C.photos.couple) || [];
-  const coupleBox = $('[data-gallery="couple"]');
-  coupleBox.innerHTML = couple.map((p, i) => `
-    <figure class="polaroid" style="--tilt:${tilt(i)}deg">
-      <button type="button" data-open="${i}" aria-label="Zvětšit fotku">
-        <img src="${esc(p.src)}" alt="${esc(p.caption || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
-      </button>
-      ${p.caption ? `<figcaption><span>${esc(p.caption)}</span></figcaption>` : ''}
-    </figure>`).join('');
-  coupleBox.addEventListener('click', e => {
-    const b = e.target.closest('[data-open]');
-    if (b) Lightbox.open(couple.map(p => ({ src: p.src, caption: p.caption })), +b.dataset.open);
-  });
+  // ---------- fotky (polaroidy + carousel + lightbox) ----------
+  // Chyba ve fotkách nesmí shodit zbytek stránky (RSVP, QR…)
+  try { setupPhotos(); } catch (ex) { console.error('Fotky:', ex); }
 
-  // mazlíčci – kartička vede do galerie s filtrem
-  const G_ALL = window.GALLERY || [];
-  $$('[data-photo-count]').forEach(el => (el.textContent = G_ALL.length ? '(' + G_ALL.length + ')' : ''));
-  $('[data-pets]').innerHTML = ((C.photos && C.photos.pets) || []).map((p, i) => {
-    const n = G_ALL.filter(g => g.t.includes(p.tag)).length;
-    return `
-    <a class="polaroid pet" href="galerie.html#${esc(p.tag)}" style="--tilt:${tilt(i)}deg">
-      <img src="${esc(p.src)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
-      <figcaption>
-        <b>${esc(p.name)}</b>
-        ${p.alias ? `<span class="alias">${esc(p.alias)}</span>` : ''}
-        ${n ? `<span class="pet-more">${n} fotek →</span>` : ''}
-      </figcaption>
-    </a>`;
-  }).join('');
-  if (C.photos && C.photos.banner) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
+  function setupPhotos() {
+    const P = C.photos || {};
+    const ALL = window.GALLERY || [];
+    const tilt = i => [-3, 2, -1.5, 3, -2.5, 1.5][i % 6];
+    const thumb = g => 'assets/gallery/thumb/' + g.f;
+    const full = g => 'assets/gallery/full/' + g.f;
+    const open = (list, i) => window.Lightbox && Lightbox.open(list, i);
+
+    // polaroidy „To jsme my“
+    const couple = P.couple || [];
+    const coupleBox = $('[data-gallery="couple"]');
+    if (coupleBox) {
+      coupleBox.innerHTML = couple.map((p, i) => `
+        <figure class="polaroid" style="--tilt:${tilt(i)}deg">
+          <button type="button" data-open="${i}" aria-label="Zvětšit fotku">
+            <img src="${esc(p.src)}" alt="${esc(p.caption || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+          </button>
+          ${p.caption ? `<figcaption><span>${esc(p.caption)}</span></figcaption>` : ''}
+        </figure>`).join('');
+      coupleBox.addEventListener('click', e => {
+        const b = e.target.closest('[data-open]');
+        if (b) open(couple.map(p => ({ src: p.src, caption: p.caption })), +b.dataset.open);
+      });
+    }
+
+    // carousel – řada polaroidů, které se posouvají do strany
+    function carousel(el, items, title) {
+      el.innerHTML = `
+        ${title ? `<p class="car-title">${esc(title)}</p>` : ''}
+        <div class="car">
+          <button type="button" class="car-btn car-prev" aria-label="Posunout zpět">‹</button>
+          <div class="car-track" tabindex="0">
+            ${items.map((g, i) => `
+              <figure class="polaroid car-item" style="--tilt:${tilt(i) / 2}deg">
+                <button type="button" data-i="${i}" aria-label="Zvětšit fotku ${i + 1}">
+                  <img src="${thumb(g)}" alt="" loading="lazy">
+                </button>
+              </figure>`).join('')}
+          </div>
+          <button type="button" class="car-btn car-next" aria-label="Posunout dál">›</button>
+        </div>`;
+      const track = $('.car-track', el);
+      const by = d => track.scrollBy({ left: d * track.clientWidth * 0.85, behavior: 'smooth' });
+      $('.car-prev', el).onclick = () => by(-1);
+      $('.car-next', el).onclick = () => by(1);
+      track.onclick = e => {
+        const b = e.target.closest('[data-i]');
+        if (b) open(items.map(g => ({ src: full(g) })), +b.dataset.i);
+      };
+    }
+
+    // „Zobrazit zbytek“ pod polaroidy páru
+    const shown = new Set(couple.map(p => p.g).filter(Boolean));
+    const coupleRest = ALL.filter(g => (g.t.includes('my') || g.t.includes('japonsko')) && !shown.has(g.f.replace('.webp', '')));
+    setupMore('couple', coupleRest);
+
+    // mazlíčci – polaroidy se jmény; klik ukáže carousel s jeho fotkami
+    const pets = P.pets || [];
+    const petBox = $('[data-pets]');
+    const petCar = $('#pets-more');
+    if (petBox) {
+      petBox.innerHTML = pets.map((p, i) => {
+        const n = ALL.filter(g => g.t.includes(p.tag)).length;
+        return `
+        <figure class="polaroid pet" style="--tilt:${tilt(i)}deg">
+          <button type="button" data-pet="${i}" aria-expanded="false" aria-controls="pets-more">
+            <img src="${esc(p.src)}" alt="${esc(p.name)}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+          </button>
+          <figcaption>
+            <b>${esc(p.name)}</b>
+            ${p.alias ? `<span class="alias">${esc(p.alias)}</span>` : ''}
+            ${n ? `<button type="button" class="pet-more" data-pet="${i}">${n} fotek ↓</button>` : ''}
+          </figcaption>
+        </figure>`;
+      }).join('');
+      let active = null;
+      petBox.addEventListener('click', e => {
+        const b = e.target.closest('[data-pet]');
+        if (!b) return;
+        const i = +b.dataset.pet;
+        $$('[data-pet]', petBox).forEach(x => x.setAttribute('aria-expanded', 'false'));
+        $$('.pet', petBox).forEach(x => x.classList.remove('active'));
+        if (active === i) { active = null; petCar.hidden = true; return; }
+        active = i;
+        const p = pets[i];
+        const list = ALL.filter(g => g.t.includes(p.tag));
+        carousel(petCar, list, p.tag === 'psi' ? 'Lucky & Dusty' : p.name);
+        petCar.hidden = false;
+        b.closest('.pet').classList.add('active');
+        $$(`[data-pet="${i}"]`, petBox).forEach(x => x.setAttribute('aria-expanded', 'true'));
+        petCar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+    // „Zobrazit zbytek“ u mazlíčků = všechny fotky zvířátek
+    setupMore('pets', ALL.filter(g => g.t.includes('kocky') || g.t.includes('psi')), petCar);
+
+    function setupMore(name, items, alsoHide) {
+      const btn = $(`[data-more="${name}"]`);
+      const box = $(`#${name}-rest`);
+      if (!btn || !box || !items.length) { if (btn) btn.hidden = true; return; }
+      const label = btn.textContent.trim();
+      btn.textContent = `${label} (${items.length})`;
+      btn.onclick = () => {
+        const show = box.hidden;
+        if (show && !box.dataset.built) { carousel(box, items); box.dataset.built = 1; }
+        box.hidden = !show;
+        if (alsoHide && show) { alsoHide.hidden = true; }
+        btn.textContent = show ? 'Skrýt fotky' : `${label} (${items.length})`;
+        btn.setAttribute('aria-expanded', show);
+        if (show) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      };
+    }
+  }
+
+  if (C.photos && C.photos.banner && $('.banner')) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
   // co s sebou
   $('[data-bring]').innerHTML = C.bring.map(b => `<li>${esc(b)}</li>`).join('');
 

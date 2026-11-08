@@ -46,20 +46,21 @@ window.WEDDING = {
   // sakura, obrad, foto, ramen, dort, lampiony, dorazim, daruma, maneki, check
 
   // Fotky na hlavní stránce – soubory jsou ve složce assets/photos.
-  // Všechny fotky (galerie.html) jsou v assets/gallery a seznam v gallery-data.js.
+  // Ostatní fotky („Zobrazit zbytek“) jsou v assets/gallery, seznam a štítky v gallery-data.js.
+  // g = číslo stejné fotky v assets/gallery, aby se v „zbytku“ neopakovala.
   // pos = která část fotky má zůstat vidět při ořezu (např. 'top', 'center 30%')
   photos: {
     couple: [
-      { src: 'assets/photos/my-torii.webp', caption: 'Japonsko 🇯🇵' },
-      { src: 'assets/photos/my-peace.webp', caption: '' },
-      { src: 'assets/photos/my-dilna.webp', caption: '' },
-      { src: 'assets/photos/my-zabka.webp', caption: '' },
-      { src: 'assets/photos/my-chram.webp', caption: 'Japonsko 🇯🇵' },
-      { src: 'assets/photos/my-zahrada.webp', caption: '' },
-      { src: 'assets/photos/japonsko-zahrada.webp', caption: 'Až se tam vrátíme 🌿' },
-      { src: 'assets/photos/my-vecer.webp', caption: '', pos: 'center 30%' },
+      { g: '097', src: 'assets/photos/my-torii.webp', caption: 'Japonsko 🇯🇵' },
+      { g: '033', src: 'assets/photos/my-peace.webp', caption: '' },
+      { g: '087', src: 'assets/photos/my-dilna.webp', caption: '' },
+      { g: '103', src: 'assets/photos/my-zabka.webp', caption: '' },
+      { g: '093', src: 'assets/photos/my-chram.webp', caption: 'Japonsko 🇯🇵' },
+      { g: '102', src: 'assets/photos/my-zahrada.webp', caption: '' },
+      { g: '104', src: 'assets/photos/japonsko-zahrada.webp', caption: 'Až se tam vrátíme 🌿' },
+      { g: '032', src: 'assets/photos/my-vecer.webp', caption: '', pos: 'center 30%' },
     ],
-    // Mazlíčci – kartička odkazuje do galerie (tag = filtr v galerii: loki, himiko, psi)
+    // Mazlíčci – klik na kartičku ukáže jeho fotky (tag = štítek v gallery-data.js: loki, himiko, psi)
     pets: [
       { name: 'Loki', alias: 'Bobíček · Bobík · Bobo · Bobokun', src: 'assets/photos/kocka-seda-kosik.webp', tag: 'loki' },
       { name: 'Himiko', alias: 'Himomímo · Bibiko · Bibičko · Bíba', src: 'assets/photos/kocka-siam.webp', tag: 'himiko' },

@@ -282,30 +282,34 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
 .polaroid figcaption b { display: block; font-size: 18px; }
 .polaroid figcaption span { color: var(--sumi-soft); font-size: 15px; }
 .pets .polaroid img { aspect-ratio: 1; display: block; width: 100%; object-fit: cover; }
-.polaroid.pet { display: block; color: inherit; text-decoration: none; }
+.pet > button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.pet.active { box-shadow: 0 0 0 4px var(--shu), 0 18px 36px rgba(43,38,34,.2); transform: rotate(0deg) scale(1.03); }
 .pet .alias { display: block; font-size: 14px; font-style: italic; }
-.pet .pet-more { display: inline-block; margin-top: 6px; font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--shu); }
+.pet .pet-more {
+  margin-top: 6px; padding: 2px 8px; border: 0; background: none; cursor: pointer;
+  font: 700 13px var(--sans); color: var(--shu);
+}
 .more { margin-top: 36px; }
 
-/* ============ Galerie ============ */
-.gallery-page .title { margin-top: 10px; }
-.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 24px 0 28px; }
-.filters button {
-  font: 600 15px var(--sans); color: var(--sumi); cursor: pointer;
-  padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--kraft); background: #fffdf8;
+/* ============ Carousel ============ */
+.car-wrap { margin-top: 30px; }
+.car-title { text-align: center; font-family: var(--serif); font-weight: 800; font-size: 22px; margin: 0 0 4px; }
+.car { position: relative; }
+.car-track {
+  display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 26px 8px 22px; scrollbar-width: thin; scrollbar-color: var(--kraft) transparent;
 }
-.filters button small { color: var(--sumi-soft); font-weight: 400; }
-.filters button[aria-selected=true] { background: var(--shu); border-color: var(--shu); color: var(--washi); }
-.filters button[aria-selected=true] small { color: var(--washi); opacity: .8; }
-.masonry { columns: 4 240px; column-gap: 14px; }
-.m-item {
-  display: block; width: 100%; margin: 0 0 14px; padding: 6px; border: 0; cursor: zoom-in;
-  background: #fffdf8; box-shadow: 0 6px 16px rgba(43,38,34,.1); break-inside: avoid;
-  transition: transform .2s;
+.car-track:focus-visible { outline: 2px solid var(--shu); outline-offset: 2px; }
+.car-item { flex: 0 0 210px; scroll-snap-align: start; }
+.car-item img { aspect-ratio: 4 / 5; }
+.car-btn {
+  position: absolute; top: 50%; z-index: 3; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--shu); color: var(--washi); font-size: 28px; line-height: 1;
+  box-shadow: 0 6px 16px rgba(184,50,42,.3);
 }
-.m-item:hover { transform: translateY(-3px); }
-.m-item img { display: block; width: 100%; height: auto; background: var(--washi-2); }
-
+.car-prev { left: -8px; }
+.car-next { right: -8px; }
 /* ============ Banner torii ============ */
 .banner {
   position: relative; min-height: 440px; display: grid; place-items: center;
@@ -377,8 +381,11 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
   .polaroid figcaption span { font-size: 13px; }
   .polaroid::before { width: 56px; height: 18px; top: -9px; }
   .banner { min-height: 300px; }
-  .masonry { columns: 2; column-gap: 8px; }
-  .m-item { padding: 4px; margin-bottom: 8px; }
+  .car-item { flex-basis: 62vw; }
+  .car-track { gap: 14px; }
+  .car-btn { width: 38px; height: 38px; font-size: 24px; }
+  .car-prev { left: -6px; }
+  .car-next { right: -6px; }
   .hero-vertical { display: none; }
   .field-row .field-narrow { max-width: none; }
 }
