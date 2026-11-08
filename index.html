@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naše svatba</title>
+  <meta name="description" content="Svatba na vesnici v japonském duchu – program, RSVP, písničky a informace pro hosty.">
+  <link rel="icon" href="assets/hanko.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="petals" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Hlavní navigace">
+    <a href="#program">Program</a>
+    <a href="#misto">Místo</a>
+    <a href="#info">Info</a>
+    <a href="#rsvp" class="nav-cta">RSVP</a>
+    <a href="#dary">Dary</a>
+  </nav>
+
+  <!-- ===================== ÚVOD ===================== -->
+  <header class="hero" id="top">
+    <div class="hero-vertical" aria-hidden="true">結婚式</div>
+    <div class="hero-inner">
+      <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M100 18c46 0 82 36 82 80 0 46-38 84-84 84-44 0-80-34-80-78 0-36 22-64 54-76"
+              fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <p class="hero-kicker">Bereme se!</p>
+      <h1 class="hero-names"><span data-name="a">Jméno</span> <span class="amp">&amp;</span> <span data-name="b">Jméno</span></h1>
+      <p class="hero-date" data-date>—</p>
+      <p class="hero-place" data-place>—</p>
+      <div class="countdown" data-countdown aria-live="polite"></div>
+      <a class="btn" href="#rsvp">Potvrdit účast</a>
+      <p class="hero-deadline">Prosíme o potvrzení do <strong data-deadline>—</strong></p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== POZVÁNÍ ===================== -->
+    <section class="section intro">
+      <h2 class="title"><span class="jp">ようこそ</span>Vítejte</h2>
+      <p class="lead">
+        Budeme moc rádi, když s námi oslavíte náš velký den. Svatba bude
+        <strong>vesnická, pohodová a s nádechem Japonska</strong> – lampiony, sakura, saké
+        a trocha zenu mezi stodolou a sadem.
+      </p>
+    </section>
+
+    <!-- ===================== PROGRAM ===================== -->
+    <section class="section" id="program">
+      <h2 class="title"><span class="jp">予定</span>Program dne</h2>
+      <ol class="timeline" data-schedule></ol>
+      <p class="muted center">Program se může ještě trochu měnit – případné změny vám pošleme e-mailem.</p>
+    </section>
+
+    <!-- ===================== MÍSTO ===================== -->
+    <section class="section paper" id="misto">
+      <h2 class="title"><span class="jp">場所</span>Místo</h2>
+      <div class="place-card">
+        <h3 data-place-name>—</h3>
+        <p data-place-address>—</p>
+        <p class="muted" data-place-note></p>
+        <a class="btn btn-ghost" data-place-map href="#" target="_blank" rel="noopener">Otevřít mapu</a>
+      </div>
+    </section>
+
+    <!-- ===================== INFO ===================== -->
+    <section class="section" id="info">
+      <h2 class="title"><span class="jp">案内</span>Praktické info</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">👘</div>
+          <h3>Oblečení <span class="jp-sm">服装</span></h3>
+          <p><strong>Žádný dresscode není.</strong> Přijďte v čemkoliv, v čem se budete cítit dobře.
+            Kdo má chuť, může přidat japonský detail – kimono, yukatu, vějíř, květinu do vlasů… ale je to čistě dobrovolné.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">⛺</div>
+          <h3>Ubytování <span class="jp-sm">宿泊</span></h3>
+          <p>Část hostů můžeme ubytovat přímo na místě, další možnost je spaní pod širákem
+            nebo ve vlastním stanu na louce. Dejte nám prosím vědět ve formuláři.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🎒</div>
+          <h3>Co s sebou <span class="jp-sm">持ち物</span></h3>
+          <ul data-bring></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== RSVP ===================== -->
+    <section class="section paper" id="rsvp">
+      <h2 class="title"><span class="jp">出欠</span>Potvrzení účasti</h2>
+      <p class="center">Vyplňte prosím do <strong data-deadline>—</strong>. Za každou domácnost stačí jeden formulář.
+        Pokud budete chtít něco změnit, vyplňte ho znovu se stejným e-mailem.</p>
+
+      <form class="rsvp" id="rsvp-form" novalidate>
+        <!-- past na roboty -->
+        <label class="hp" aria-hidden="true">Web <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Jméno a příjmení *</span>
+            <input type="text" name="name" required autocomplete="name" maxlength="100">
+          </label>
+          <label class="field">
+            <span>E-mail * <small>(pošleme potvrzení a novinky)</small></span>
+            <input type="email" name="email" required autocomplete="email" maxlength="120">
+          </label>
+        </div>
+
+        <fieldset class="field">
+          <legend>Dorazíte? *</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="attendance" value="yes" required><span>🎉 Dorazím</span></label>
+            <label class="choice"><input type="radio" name="attendance" value="plus"><span>👫 Dorazím s doprovodem</span></label>
+            <label class="choice"><input type="radio" name="attendance" value="no"><span>😢 Nedorazím</span></label>
+          </div>
+        </fieldset>
+
+        <div class="reveal" data-show-if="plus">
+          <div class="field-row">
+            <label class="field field-narrow">
+              <span>Počet osob doprovodu *</span>
+              <input type="number" name="companions" min="1" max="10" value="1" inputmode="numeric">
+            </label>
+            <label class="field">
+              <span>Jména doprovodu <small>(a věk u dětí)</small></span>
+              <input type="text" name="companionNames" maxlength="300" placeholder="např. Petra, Tonda (6 let)">
+            </label>
+          </div>
+        </div>
+
+        <div class="reveal" data-show-if="yes plus">
+          <fieldset class="field">
+            <legend>Přespání *</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="accommodation" value="yes"><span>🏠 Ano, chci ubytování</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="no"><span>🚗 Ne, pojedu domů</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="open"><span>🌌 Pod širákem</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="tent"><span>⛺ Ve stanu</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field music" id="hudba">
+            <legend><span class="jp-sm">音楽</span> Vaše písničky</legend>
+            <p class="muted">Vyberte jednu nebo dvě písničky, které během svatby zazní. Pomůžete nám s playlistem!</p>
+            <label class="field">
+              <span>Písnička č. 1</span>
+              <input type="text" name="song1" maxlength="200" placeholder="Interpret – Název (nebo odkaz na Spotify/YouTube)">
+            </label>
+            <label class="field">
+              <span>Písnička č. 2</span>
+              <input type="text" name="song2" maxlength="200" placeholder="Interpret – Název">
+            </label>
+          </fieldset>
+
+          <label class="field">
+            <span>Strava, alergie, omezení</span>
+            <input type="text" name="diet" maxlength="300" placeholder="např. vegetarián, bez lepku…">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Vzkaz pro nás</span>
+          <textarea name="message" rows="3" maxlength="1000"></textarea>
+        </label>
+
+        <button class="btn btn-submit" type="submit">Odeslat 送信</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- ===================== DARY ===================== -->
+    <section class="section" id="dary">
+      <h2 class="title"><span class="jp">贈り物</span>Dary</h2>
+      <div class="gift">
+        <div class="gift-text">
+          <p class="lead"><strong>Žádné dary nečekáme.</strong> Největší radost nám uděláte tím, že přijdete a budete slavit s námi.</p>
+          <p>Pokud byste nás přesto chtěli něčím potěšit, budeme nejradši za příspěvek na
+            naši vysněnou cestu. <span data-trip-note></span></p>
+          <p>Můžete přinést hotovost v obálce, nebo poslat libovolnou částku převodem – stačí naskenovat QR kód.</p>
+          <p class="muted" data-account></p>
+        </div>
+        <div class="gift-qr">
+          <label class="field">
+            <span>Od koho <small>(objeví se v poznámce platby)</small></span>
+            <input type="text" id="gift-from" maxlength="40" placeholder="Vaše jméno">
+          </label>
+          <label class="field">
+            <span>Částka v Kč <small>(nepovinné)</small></span>
+            <input type="number" id="gift-amount" min="0" step="100" placeholder="dobrovolná" inputmode="numeric">
+          </label>
+          <div class="qr-frame"><div id="qr"></div></div>
+          <p class="muted small" id="qr-hint">Naskenujte v aplikaci své banky.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/hanko.svg" alt="" width="56" height="56">
+    <p>Dotazy? Napište nám na <a data-contact href="#">—</a></p>
+    <p class="muted small">ありがとう – děkujeme!</p>
+  </footer>
+
+  <script src="assets/qrcode.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
