@@ -71,6 +71,16 @@ V tabulce v menu **💌 Svatba → Poslat mi přehled RSVP teď** si vyzkoušít
 
 ---
 
+## Fotky a ikonky
+- Fotky jsou ve složce `assets/photos` (zmenšené, formát WebP, **bez EXIF/GPS údajů**).
+- Které fotky se zobrazí, s jakým popiskem a v jakém pořadí, určuje `photos` v `config.js`
+  (`couple` = sekce *To jsme my*, `pets` = *Chlupatá rodina*, `banner` = velký pruh před RSVP).
+- Novou fotku přidáte tak, že ji nahrajete do `assets/photos` a přidáte řádek do `config.js`.
+  Ideálně ji předem zmenšete na max. ~1000 px (např. na [squoosh.app](https://squoosh.app)).
+- Ikonky jsou v `assets/icons`, v programu dne se nastavují polem `icon` u každého bodu.
+
+---
+
 ## Každodenní používání
 
 ### Rozeslání nového programu / informací

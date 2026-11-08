@@ -32,15 +32,45 @@ window.WEDDING = {
 
   // Program dne – klidně upravujte i po spuštění webu
   schedule: [
-    { time: '10:00', title: 'Příjezd hostů', desc: 'Welcome drink a matcha limonáda pod lípou.' },
-    { time: '12:00', title: 'Obřad', desc: 'Pod širým nebem v sadu.' },
-    { time: '12:45', title: 'Gratulace & focení', desc: 'Společné foto všech hostů.' },
-    { time: '13:30', title: 'Hostina', desc: 'Česká klasika s japonskými akcenty.' },
-    { time: '14:00', title: 'Krájení dortu', desc: '' },
-    { time: '15:00', title: 'Hry & Lampiony', desc: 'Společenské svatební hry & pouštění lamionů.' },
-    { time: '20:00', title: 'Večerní zábava', desc: 'Tanec, hudba, panáky a jiné společenské aktivity!' },
-    { time: '00:00', title: 'Půlnoční ramen', desc: 'Pro ty, kdo vydrží.' },
+    { time: '10:00', title: 'Příjezd hostů', icon: 'sakura', desc: 'Welcome drink a matcha limonáda pod lípou.' },
+    { time: '12:00', title: 'Obřad', icon: 'obrad', desc: 'Pod širým nebem v sadu.' },
+    { time: '12:45', title: 'Gratulace & focení', icon: 'foto', desc: 'Společné foto všech hostů.' },
+    { time: '13:30', title: 'Hostina', icon: 'ramen', desc: 'Česká klasika s japonskými akcenty.' },
+    { time: '14:00', title: 'Krájení dortu', icon: 'dort', desc: '' },
+    { time: '15:00', title: 'Hry & Lampiony', icon: 'lampiony', desc: 'Společenské svatební hry & pouštění lampionů.' },
+    { time: '20:00', title: 'Večerní zábava', icon: 'dorazim', desc: 'Tanec, hudba, panáky a jiné společenské aktivity!' },
+    { time: '00:00', title: 'Půlnoční ramen', icon: 'ramen', desc: 'Pro ty, kdo vydrží.' },
   ],
+
+  // Ikonky v programu: názvy souborů ze složky assets/icons (bez .png), např.
+  // sakura, obrad, foto, ramen, dort, lampiony, dorazim, daruma, maneki, check
+
+  // Fotky – soubory jsou ve složce assets/photos.
+  // pos = která část fotky má zůstat vidět při ořezu (např. 'top', 'center 30%')
+  photos: {
+    couple: [
+      { src: 'assets/photos/my-torii.webp', caption: 'Japonsko 🇯🇵' },
+      { src: 'assets/photos/my-peace.webp', caption: '' },
+      { src: 'assets/photos/my-dilna.webp', caption: '' },
+      { src: 'assets/photos/my-zabka.webp', caption: '' },
+      { src: 'assets/photos/my-chram.webp', caption: 'Japonsko 🇯🇵' },
+      { src: 'assets/photos/my-zahrada.webp', caption: '' },
+      { src: 'assets/photos/japonsko-zahrada.webp', caption: 'Až se tam vrátíme 🌿' },
+      { src: 'assets/photos/my-vecer.webp', caption: '', pos: 'center 30%' },
+    ],
+    // TODO: doplňte jména mazlíčků
+    pets: [
+      { src: 'assets/photos/kocka-siam.webp', name: 'Jméno kočičky', caption: 'ty modré oči…' },
+      { src: 'assets/photos/kocka-seda-kosik.webp', name: 'Jméno kočičky', caption: 'v košíku je nejlíp' },
+      { src: 'assets/photos/kocka-siam-plysak.webp', name: '', caption: 's plyšovým parťákem' },
+      { src: 'assets/photos/kocka-seda-kotatko.webp', name: '', caption: 'jako kotě' },
+      { src: 'assets/photos/kocka-seda-mlsna.webp', name: '', caption: 'mlsoun' },
+      { src: 'assets/photos/tomas-kocka.webp', name: '', caption: 'Tomáš a kočičí mazlení', pos: 'top' },
+      { src: 'assets/photos/psi-dva.webp', name: 'Jména pejsků', caption: '' },
+      { src: 'assets/photos/pes-slunce.webp', name: '', caption: 'odpočinek na sluníčku' },
+    ],
+    banner: 'assets/photos/banner-torii.webp',
+  },
 
   // Co s sebou
   bring: [

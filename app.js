@@ -28,7 +28,44 @@
 
   // program
   $('[data-schedule]').innerHTML = C.schedule.map(i => `
-    <li><time>${esc(i.time)}</time><div><h3>${esc(i.title)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ''}</div></li>`).join('');
+    <li><time>${esc(i.time)}</time>${i.icon ? `<img class="tl-icon" src="assets/icons/${esc(i.icon)}.png" alt="" width="40" height="40">` : '<span class="tl-dot"></span>'}<div><h3>${esc(i.title)}</h3>${i.desc ? `<p>${esc(i.desc)}</p>` : ''}</div></li>`).join('');
+
+  // ---------- fotky (polaroidy + lightbox) ----------
+  const galleries = {};
+  $$('[data-gallery]').forEach(box => {
+    const list = (C.photos && C.photos[box.dataset.gallery]) || [];
+    galleries[box.dataset.gallery] = list;
+    box.innerHTML = list.map((p, i) => `
+      <figure class="polaroid" style="--tilt:${[-3, 2, -1.5, 3, -2.5, 1.5][i % 6]}deg">
+        <button type="button" data-open="${box.dataset.gallery}:${i}" aria-label="Zvětšit fotku">
+          <img src="${esc(p.src)}" alt="${esc(p.alt || p.caption || p.name || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+        </button>
+        ${p.name || p.caption ? `<figcaption>${p.name ? `<b>${esc(p.name)}</b>` : ''}${p.caption ? `<span>${esc(p.caption)}</span>` : ''}</figcaption>` : ''}
+      </figure>`).join('');
+  });
+  if (C.photos && C.photos.banner) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
+
+  const lb = $('#lightbox');
+  let lbList = [], lbIdx = 0;
+  function lbShow() {
+    const p = lbList[lbIdx];
+    $('img', lb).src = p.src;
+    $('img', lb).alt = p.alt || p.caption || p.name || '';
+    $('figcaption', lb).textContent = [p.name, p.caption].filter(Boolean).join(' – ');
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-open]');
+    if (!b) return;
+    const [g, i] = b.dataset.open.split(':');
+    lbList = galleries[g]; lbIdx = +i; lbShow();
+    lb.showModal();
+  });
+  const step = d => { lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); };
+  $('.lb-prev', lb).onclick = () => step(-1);
+  $('.lb-next', lb).onclick = () => step(1);
+  $('.lb-close', lb).onclick = () => lb.close();
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') step(-1); if (e.key === 'ArrowRight') step(1); });
   // co s sebou
   $('[data-bring]').innerHTML = C.bring.map(b => `<li>${esc(b)}</li>`).join('');
 

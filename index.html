@@ -15,6 +15,7 @@
   <div class="petals" aria-hidden="true"></div>
 
   <nav class="nav" aria-label="Hlavní navigace">
+    <a href="#my">My</a>
     <a href="#program">Program</a>
     <a href="#misto">Místo</a>
     <a href="#info">Info</a>
@@ -25,6 +26,7 @@
   <!-- ===================== ÚVOD ===================== -->
   <header class="hero" id="top">
     <div class="hero-vertical" aria-hidden="true">結婚式</div>
+    <div class="hero-grid">
     <div class="hero-inner">
       <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
         <path d="M100 18c46 0 82 36 82 80 0 46-38 84-84 84-44 0-80-34-80-78 0-36 22-64 54-76"
@@ -37,6 +39,10 @@
       <div class="countdown" data-countdown aria-live="polite"></div>
       <a class="btn" href="#rsvp">Potvrdit účast</a>
       <p class="hero-deadline">Prosíme o potvrzení do <strong data-deadline>—</strong></p>
+    </div>
+    <figure class="hero-art">
+      <img src="assets/fuji.webp" alt="Ilustrace: hora Fudži, pagoda a kvetoucí sakura" width="825" height="1100">
+    </figure>
     </div>
   </header>
 
@@ -51,10 +57,26 @@
       </p>
     </section>
 
+    <!-- ===================== TO JSME MY ===================== -->
+    <section class="section wide" id="my">
+      <h2 class="title"><span class="jp">私たち</span>To jsme my</h2>
+      <div class="polaroids" data-gallery="couple"></div>
+    </section>
+
+    <!-- ===================== MAZLÍČCI ===================== -->
+    <section class="section paper wide" id="mazlicci">
+      <h2 class="title"><img class="title-icon" src="assets/icons/maneki.png" alt="" width="64" height="64"><span class="jp">家族</span>A naše chlupatá rodina</h2>
+      <p class="center muted">Bez nich by to nebylo ono. 🐾</p>
+      <div class="polaroids pets" data-gallery="pets"></div>
+    </section>
+
     <!-- ===================== PROGRAM ===================== -->
     <section class="section" id="program">
       <h2 class="title"><span class="jp">予定</span>Program dne</h2>
-      <ol class="timeline" data-schedule></ol>
+      <div class="program-wrap">
+        <ol class="timeline" data-schedule></ol>
+        <img class="program-art" src="assets/ryze.webp" alt="" width="700" height="700" loading="lazy">
+      </div>
       <p class="muted center">Program se může ještě trochu měnit – případné změny vám pošleme e-mailem.</p>
     </section>
 
@@ -74,24 +96,29 @@
       <h2 class="title"><span class="jp">案内</span>Praktické info</h2>
       <div class="cards">
         <article class="card">
-          <div class="card-icon" aria-hidden="true">👘</div>
+          <img class="card-icon" src="assets/icons/obleceni.png" alt="" width="64" height="64">
           <h3>Oblečení <span class="jp-sm">服装</span></h3>
           <p><strong>Žádný dresscode není.</strong> Přijďte v čemkoliv, v čem se budete cítit dobře.
             Kdo má chuť, může přidat japonský detail – kimono, yukatu, vějíř, květinu do vlasů… ale je to čistě dobrovolné.</p>
         </article>
         <article class="card">
-          <div class="card-icon" aria-hidden="true">⛺</div>
+          <img class="card-icon" src="assets/icons/ubytovani.png" alt="" width="64" height="64">
           <h3>Ubytování <span class="jp-sm">宿泊</span></h3>
           <p>Část hostů můžeme ubytovat přímo na místě, další možnost je spaní pod širákem
             nebo ve vlastním stanu na louce. Dejte nám prosím vědět ve formuláři.</p>
         </article>
         <article class="card">
-          <div class="card-icon" aria-hidden="true">🎒</div>
+          <img class="card-icon" src="assets/icons/s-sebou.png" alt="" width="64" height="64">
           <h3>Co s sebou <span class="jp-sm">持ち物</span></h3>
           <ul data-bring></ul>
         </article>
       </div>
     </section>
+
+    <!-- ===================== BANNER ===================== -->
+    <div class="banner" role="img" aria-label="Brány torii v Japonsku">
+      <p class="banner-text"><span class="jp">一緒に祝おう</span>Pojďte to s námi oslavit!</p>
+    </div>
 
     <!-- ===================== RSVP ===================== -->
     <section class="section paper" id="rsvp">
@@ -117,9 +144,9 @@
         <fieldset class="field">
           <legend>Dorazíte? *</legend>
           <div class="choices">
-            <label class="choice"><input type="radio" name="attendance" value="yes" required><span>🎉 Dorazím</span></label>
-            <label class="choice"><input type="radio" name="attendance" value="plus"><span>👫 Dorazím s doprovodem</span></label>
-            <label class="choice"><input type="radio" name="attendance" value="no"><span>😢 Nedorazím</span></label>
+            <label class="choice"><input type="radio" name="attendance" value="yes" required><span><img src="assets/icons/dorazim.png" alt="" width="28" height="28">Dorazím</span></label>
+            <label class="choice"><input type="radio" name="attendance" value="plus"><span><img src="assets/icons/doprovod.png" alt="" width="28" height="28">Dorazím s doprovodem</span></label>
+            <label class="choice"><input type="radio" name="attendance" value="no"><span><img src="assets/icons/nedorazim.png" alt="" width="28" height="28">Nedorazím</span></label>
           </div>
         </fieldset>
 
@@ -140,10 +167,10 @@
           <fieldset class="field">
             <legend>Přespání *</legend>
             <div class="choices">
-              <label class="choice"><input type="radio" name="accommodation" value="yes"><span>🏠 Ano, chci ubytování</span></label>
-              <label class="choice"><input type="radio" name="accommodation" value="no"><span>🚗 Ne, pojedu domů</span></label>
-              <label class="choice"><input type="radio" name="accommodation" value="open"><span>🌌 Pod širákem</span></label>
-              <label class="choice"><input type="radio" name="accommodation" value="tent"><span>⛺ Ve stanu</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="yes"><span><img src="assets/icons/hotel.png" alt="" width="28" height="28">Ano, chci ubytování</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="no"><span><img src="assets/icons/auto.png" alt="" width="28" height="28">Ne, pojedu domů</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="open"><span><img src="assets/icons/sirak.png" alt="" width="28" height="28">Pod širákem</span></label>
+              <label class="choice"><input type="radio" name="accommodation" value="tent"><span><img src="assets/icons/stan.png" alt="" width="28" height="28">Ve stanu</span></label>
             </div>
           </fieldset>
 
@@ -178,7 +205,7 @@
 
     <!-- ===================== DARY ===================== -->
     <section class="section" id="dary">
-      <h2 class="title"><span class="jp">贈り物</span>Dary</h2>
+      <h2 class="title"><img class="title-icon" src="assets/icons/dar.png" alt="" width="64" height="64"><span class="jp">贈り物</span>Dary</h2>
       <div class="gift">
         <div class="gift-text">
           <p class="lead"><strong>Žádné dary nečekáme.</strong> Největší radost nám uděláte tím, že přijdete a budete slavit s námi.</p>
@@ -202,6 +229,14 @@
       </div>
     </section>
   </main>
+
+  <!-- lightbox pro fotky -->
+  <dialog class="lightbox" id="lightbox">
+    <button class="lb-close" type="button" aria-label="Zavřít">×</button>
+    <button class="lb-prev" type="button" aria-label="Předchozí">‹</button>
+    <figure><img alt=""><figcaption></figcaption></figure>
+    <button class="lb-next" type="button" aria-label="Další">›</button>
+  </dialog>
 
   <footer class="footer">
     <img src="assets/hanko.svg" alt="" width="56" height="56">
