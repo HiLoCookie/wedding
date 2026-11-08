@@ -54,9 +54,9 @@ window.WEDDING = {
   // Dary – QR platba (formát QR Platba / SPD, funguje ve všech českých bankách)
   gift: {
     // TODO: IBAN vašeho účtu (bez mezer). Dokud je prázdný, QR kód se nezobrazí.
-    iban: '',
+    iban: 'CZ85 0800 0000 0056 6809 9023',
     // TODO: číslo účtu v českém formátu pro ruční zadání, např. '123456789/0800'
-    accountDisplay: '',
+    accountDisplay: '5668099023/0800',
     recipient: 'Novomanzele', // jméno příjemce v QR (bez diakritiky)
     message: 'Svatebni dar od: ',
     tripNote: 'Na rok 2030 plánujeme měsíční cestu po Japonsku (odhadem 200 000 Kč).',
