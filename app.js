@@ -148,6 +148,34 @@
     }
   }
 
+  // ---------- videa ----------
+  try { setupVideos(); } catch (ex) { console.error('Videa:', ex); }
+  function setupVideos() {
+    const V = (C.videos && C.videos.list || []).filter(v => v.youtube || v.src);
+    const sec = $('#videa');
+    if (!sec || !V.length) return;
+    sec.hidden = false;
+    $('[data-videos-intro]').textContent = C.videos.intro || '';
+    const items = V.map(v => v.youtube
+      ? { youtube: v.youtube, caption: v.title }
+      : { video: v.src, poster: v.poster, caption: v.title });
+    const poster = v => v.poster || (v.youtube ? `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg` : '');
+    const box = $('[data-videos]');
+    box.innerHTML = V.map((v, i) => `
+      <figure class="polaroid video-card" style="--tilt:${[-2, 1.5, -1, 2][i % 4]}deg">
+        <button type="button" data-v="${i}" aria-label="Přehrát video: ${esc(v.title || '')}">
+          ${poster(v) ? `<img src="${esc(poster(v))}" alt="" loading="lazy">` : '<span class="video-blank"></span>'}
+          <span class="play" aria-hidden="true"></span>
+          ${v.length ? `<span class="video-len">${esc(v.length)}</span>` : ''}
+        </button>
+        <figcaption>${v.title ? `<b>${esc(v.title)}</b>` : ''}${v.note ? `<span>${esc(v.note)}</span>` : ''}</figcaption>
+      </figure>`).join('');
+    box.addEventListener('click', e => {
+      const b = e.target.closest('[data-v]');
+      if (b && window.Lightbox) Lightbox.open(items, +b.dataset.v);
+    });
+  }
+
   if (C.photos && C.photos.banner && $('.banner')) $('.banner').style.backgroundImage = `url("${C.photos.banner}")`;
   // co s sebou
   $('[data-bring]').innerHTML = C.bring.map(b => `<li>${esc(b)}</li>`).join('');

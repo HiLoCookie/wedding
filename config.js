@@ -70,6 +70,16 @@ window.WEDDING = {
     banner: 'assets/photos/banner-torii.webp',
   },
 
+  // Videa – sekce „Náš příběh“ se zobrazí, jakmile tu bude aspoň jedno video.
+  // Buď vlastní soubor:  { title: '…', src: 'assets/videos/zadost-1.mp4', poster: 'assets/videos/zadost-1.jpg', length: '1:23' }
+  // nebo YouTube:        { title: '…', youtube: 'dQw4w9WgXcQ' }   (ID je část odkazu za „v=“ nebo za „youtu.be/“)
+  videos: {
+    intro: 'Pár vzpomínek na to, jak to celé začalo 💍',
+    list: [
+      // { title: 'Žádost o ruku – 1. část', note: 'od Tomáše', src: 'assets/videos/zadost-1.mp4', poster: 'assets/videos/zadost-1.jpg' },
+    ],
+  },
+
   // Co s sebou
   bring: [
     'Dobrou náladu a chuť tančit',

@@ -81,6 +81,9 @@ V tabulce v menu **💌 Svatba → Poslat mi přehled RSVP teď** si vyzkoušít
   Jsou ve složce `assets/gallery` (`thumb` = náhledy, `full` = velké), seznam a štítky
   (`my`, `japonsko`, `loki`, `himiko`, `kocky`, `psi`) jsou v `gallery-data.js` – když je fotka ve špatné
   skupině, stačí jí přepsat štítek. Klik na mazlíčka ukáže fotky s jeho štítkem.
+- **Videa** (sekce „Náš příběh“) se nastavují v `config.js` v části `videos`. Sekce je skrytá, dokud tam není
+  aspoň jedno video. Vlastní soubory patří do `assets/videos` (MP4, ideálně do ~50 MB, GitHub nepřijme soubor nad 100 MB),
+  nebo stačí vložit ID videa z YouTube.
 - **Po každé úpravě souborů** zvyšte v `index.html` číslo verze `?v=5` (např. na `?v=6`),
   jinak může prohlížeč hostů ještě chvíli používat starou verzi z mezipaměti.
 - Ikonky jsou v `assets/icons`, v programu dne se nastavují polem `icon` u každého bodu.

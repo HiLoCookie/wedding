@@ -291,6 +291,26 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
 }
 .more { margin-top: 36px; }
 
+/* ============ Videa ============ */
+.videos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.video-card > button { position: relative; display: block; width: 100%; padding: 0; border: 0; background: var(--sumi); cursor: pointer; }
+.video-card img, .video-blank { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.video-blank { background: linear-gradient(135deg, var(--ai), var(--shu)); }
+.play {
+  position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: rgba(184, 50, 42, .92); box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  transition: transform .2s;
+}
+.play::after {
+  content: ''; position: absolute; left: 27px; top: 21px;
+  border-style: solid; border-width: 13px 0 13px 21px; border-color: transparent transparent transparent var(--washi);
+}
+.video-card:hover .play { transform: translate(-50%, -50%) scale(1.1); }
+.video-len {
+  position: absolute; right: 8px; bottom: 8px; padding: 1px 7px; border-radius: 6px;
+  background: rgba(0,0,0,.7); color: #fff; font-size: 13px;
+}
+
 /* ============ Carousel ============ */
 .car-wrap { margin-top: 30px; }
 .car-title { text-align: center; font-family: var(--serif); font-weight: 800; font-size: 22px; margin: 0 0 4px; }
@@ -329,6 +349,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--shu); box-shado
 }
 .lightbox::backdrop { background: rgba(20, 16, 14, .88); }
 .lightbox figure { margin: 0; text-align: center; }
+.lightbox video { display: block; max-width: 92vw; max-height: 84vh; margin: 0 auto; background: #000; border-radius: 6px; }
+.lb-yt { width: min(92vw, 150vh); aspect-ratio: 16 / 9; max-height: 84vh; }
+.lb-yt iframe { width: 100%; height: 100%; border: 0; border-radius: 6px; }
 .lightbox img { display: block; max-width: 92vw; max-height: 84vh; min-width: min(80vw, 480px); object-fit: contain; background: #fffdf8; margin: 0 auto; border: 8px solid #fffdf8; border-radius: 4px; }
 .lightbox figcaption { color: var(--washi); font-family: var(--serif); margin-top: 10px; min-height: 1.4em; }
 .lightbox button {

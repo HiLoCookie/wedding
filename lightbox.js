@@ -1,4 +1,7 @@
-/* Jednoduchý lightbox pro fotky – použití: Lightbox.open([{src, caption}], index) */
+/*
+ * Jednoduchý lightbox pro fotky a videa.
+ * Použití: Lightbox.open([{ src, caption } | { video, poster, caption } | { youtube, caption }], index)
+ */
 window.Lightbox = (function () {
   'use strict';
   const dlg = document.createElement('dialog');
@@ -6,35 +9,44 @@ window.Lightbox = (function () {
   dlg.innerHTML = `
     <button class="lb-close" type="button" aria-label="Zavřít">×</button>
     <button class="lb-prev" type="button" aria-label="Předchozí">‹</button>
-    <figure><img alt=""><figcaption></figcaption></figure>
+    <figure><div class="lb-media"></div><figcaption></figcaption></figure>
     <button class="lb-next" type="button" aria-label="Další">›</button>`;
   document.body.appendChild(dlg);
 
-  const img = dlg.querySelector('img');
+  const media = dlg.querySelector('.lb-media');
   const cap = dlg.querySelector('figcaption');
   let list = [], idx = 0;
+  const attr = s => String(s || '').replace(/"/g, '&quot;');
 
   function show() {
     const p = list[idx];
-    img.src = p.src;
-    img.alt = p.caption || '';
-    cap.textContent = (p.caption ? p.caption + '  ·  ' : '') + (idx + 1) + ' / ' + list.length;
-    // přednačtení sousedních fotek
-    [idx - 1, idx + 1].forEach(i => { const q = list[(i + list.length) % list.length]; if (q) new Image().src = q.src; });
+    if (p.youtube) {
+      media.innerHTML = `<div class="lb-yt"><iframe src="https://www.youtube-nocookie.com/embed/${attr(p.youtube)}?autoplay=1&rel=0"
+        title="${attr(p.caption)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+    } else if (p.video) {
+      media.innerHTML = `<video src="${attr(p.video)}" poster="${attr(p.poster)}" controls autoplay playsinline></video>`;
+    } else {
+      media.innerHTML = `<img src="${attr(p.src)}" alt="${attr(p.caption)}">`;
+      // přednačtení sousedních fotek
+      [idx - 1, idx + 1].forEach(i => { const q = list[(i + list.length) % list.length]; if (q && q.src) new Image().src = q.src; });
+    }
+    cap.textContent = (p.caption || '') + (list.length > 1 ? (p.caption ? '  ·  ' : '') + (idx + 1) + ' / ' + list.length : '');
   }
   function step(d) { idx = (idx + d + list.length) % list.length; show(); }
 
   dlg.querySelector('.lb-prev').onclick = () => step(-1);
   dlg.querySelector('.lb-next').onclick = () => step(1);
   dlg.querySelector('.lb-close').onclick = () => dlg.close();
+  dlg.addEventListener('close', () => { media.innerHTML = ''; }); // zastaví video
   dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener('keydown', e => {
+    if (e.target.tagName === 'VIDEO') return; // šipky ovládají video
     if (e.key === 'ArrowLeft') step(-1);
     if (e.key === 'ArrowRight') step(1);
   });
-  // swipe na mobilu
+  // swipe na mobilu (ne přes video, tam se posouvá čas)
   let x0 = null;
-  dlg.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  dlg.addEventListener('touchstart', e => { x0 = e.target.closest('video, iframe') ? null : e.touches[0].clientX; }, { passive: true });
   dlg.addEventListener('touchend', e => {
     if (x0 === null) return;
     const dx = e.changedTouches[0].clientX - x0;
