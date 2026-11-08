@@ -7,20 +7,20 @@
  */
 window.WEDDING = {
   // TODO: vaše jména
-  couple: { a: 'Jméno', b: 'Jméno' },
+  couple: { a: 'Eliška', b: 'Tomáš' },
 
   // TODO: datum a čas obřadu (ISO formát, +01:00 v zimě / +02:00 v létě)
-  date: '2027-06-12T14:00:00+02:00',
+  date: '2027-09-11T11:00:00+02:00',
 
   // TODO: do kdy mají hosté potvrdit účast (RRRR-MM-DD)
-  rsvpDeadline: '2027-04-30',
+  rsvpDeadline: '2027-02-15',
 
   // TODO: místo konání
   place: {
-    name: 'Statek U Lípy',
-    address: 'Obec 123, 123 45 Někde',
+    name: 'Naše zahrada & stodola',
+    address: 'Lhenice 45, 415 01 Teplice',
     mapUrl: 'https://mapy.cz/',
-    note: 'Parkovat se dá přímo u statku na louce. Cesta je značená lampiony 🏮',
+    note: 'Parkovat se dá přímo u domu, případně cca 2min. pěšky u rybníka.',
   },
 
   // URL webové aplikace z Google Apps Scriptu (viz README, krok 4).
@@ -28,17 +28,17 @@ window.WEDDING = {
   scriptUrl: '',
 
   // Kontakt pro dotazy
-  contact: { email: 'svatba@example.com', phone: '' },
+  contact: { email: 'eliska.vyskocilova.sos@gmail.com', phone: '+420 777 244 799' },
 
   // Program dne – klidně upravujte i po spuštění webu
   schedule: [
-    { time: '13:00', title: 'Příjezd hostů', desc: 'Welcome drink a matcha limonáda pod lípou.' },
-    { time: '14:00', title: 'Obřad', desc: 'Pod širým nebem v sadu.' },
-    { time: '14:45', title: 'Gratulace & focení', desc: 'Společné foto všech hostů.' },
-    { time: '15:30', title: 'Hostina', desc: 'Česká klasika s japonskými akcenty.' },
-    { time: '17:00', title: 'Krájení dortu', desc: '' },
-    { time: '18:00', title: 'Hry & ohňostroj lampionů', desc: 'Vypouštění přání po vodě.' },
-    { time: '20:00', title: 'Večerní zábava', desc: 'Hraje DJ – vaše písničky z RSVP!' },
+    { time: '10:00', title: 'Příjezd hostů', desc: 'Welcome drink a matcha limonáda pod lípou.' },
+    { time: '12:00', title: 'Obřad', desc: 'Pod širým nebem v sadu.' },
+    { time: '12:45', title: 'Gratulace & focení', desc: 'Společné foto všech hostů.' },
+    { time: '13:30', title: 'Hostina', desc: 'Česká klasika s japonskými akcenty.' },
+    { time: '14:00', title: 'Krájení dortu', desc: '' },
+    { time: '15:00', title: 'Hry & Lampiony', desc: 'Společenské svatební hry & pouštění lamionů.' },
+    { time: '20:00', title: 'Večerní zábava', desc: 'Tanec, hudba, panáky a jiné společenské aktivity!' },
     { time: '00:00', title: 'Půlnoční ramen', desc: 'Pro ty, kdo vydrží.' },
   ],
 
