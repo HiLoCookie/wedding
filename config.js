@@ -25,7 +25,7 @@ window.WEDDING = {
 
   // URL webové aplikace z Google Apps Scriptu (viz README, krok 4).
   // Dokud je prázdné, formulář běží v „ukázkovém režimu“ a nic neodesílá.
-  scriptUrl: '',
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbwigcj0ELw1q0xhhyNotT96i-T_IcK3DEeMeEpuSSbxaifztfgnIJ2e0ZUrCu1h0DHK/exec',
 
   // Kontakt pro dotazy
   contact: { email: 'eliska.vyskocilova.sos@gmail.com', phone: '+420 777 244 799' },
