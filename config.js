@@ -60,6 +60,17 @@ window.WEDDING = {
       { g: '104', src: 'assets/photos/japonsko-zahrada.webp', caption: 'Až se tam vrátíme 🌿' },
       { g: '032', src: 'assets/photos/my-vecer.webp', caption: '', pos: 'center 30%' },
     ],
+    // Malý Tomáš – vybrané fotky z dětství (zbytek je pod tlačítkem „Zobrazit zbytek fotek“)
+    tomas: [
+      { g: 't25', caption: '' },
+      { g: 't23', caption: '' },
+      { g: 't21', caption: 'Cool od malička 😎' },
+      { g: 't16', caption: 'Superman' },
+      { g: 't22', caption: '' },
+      { g: 't10', caption: '' },
+      { g: 't24', caption: '' },
+      { g: 't00', caption: '' },
+    ],
     // Mazlíčci – klik na kartičku ukáže jeho fotky (tag = štítek v gallery-data.js: loki, himiko, psi)
     pets: [
       { name: 'Loki', alias: 'Bobíček · Bobík · Bobo · Bobokun', src: 'assets/photos/kocka-seda-kosik.webp', tag: 'loki' },

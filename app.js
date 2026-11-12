@@ -42,22 +42,28 @@
     const full = g => 'assets/gallery/full/' + g.f;
     const open = (list, i) => window.Lightbox && Lightbox.open(list, i);
 
-    // polaroidy „To jsme my“
-    const couple = P.couple || [];
-    const coupleBox = $('[data-gallery="couple"]');
-    if (coupleBox) {
-      coupleBox.innerHTML = couple.map((p, i) => `
+    // polaroidy – položka má buď src (assets/photos), nebo g (číslo fotky v assets/gallery, např. '097' nebo 't25')
+    const pSrc = p => p.src || 'assets/gallery/thumb/' + p.g + '.webp';
+    const pFull = p => p.src || 'assets/gallery/full/' + p.g + '.webp';
+    function polaroids(name) {
+      const list = P[name] || [];
+      const box = $(`[data-gallery="${name}"]`);
+      if (!box) return list;
+      box.innerHTML = list.map((p, i) => `
         <figure class="polaroid" style="--tilt:${tilt(i)}deg">
           <button type="button" data-open="${i}" aria-label="Zvětšit fotku">
-            <img src="${esc(p.src)}" alt="${esc(p.caption || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
+            <img src="${esc(pSrc(p))}" alt="${esc(p.caption || '')}" loading="lazy" style="object-position:${esc(p.pos || 'center')}">
           </button>
           ${p.caption ? `<figcaption><span>${esc(p.caption)}</span></figcaption>` : ''}
         </figure>`).join('');
-      coupleBox.addEventListener('click', e => {
+      box.addEventListener('click', e => {
         const b = e.target.closest('[data-open]');
-        if (b) open(couple.map(p => ({ src: p.src, caption: p.caption })), +b.dataset.open);
+        if (b) open(list.map(p => ({ src: pFull(p), caption: p.caption })), +b.dataset.open);
       });
+      return list;
     }
+    const couple = polaroids('couple');
+    const tomas = polaroids('tomas');
 
     // carousel – řada polaroidů, které se posouvají do strany
     function carousel(el, items, title) {
@@ -89,6 +95,8 @@
     const shown = new Set(couple.map(p => p.g).filter(Boolean));
     const coupleRest = ALL.filter(g => (g.t.includes('my') || g.t.includes('japonsko')) && !shown.has(g.f.replace('.webp', '')));
     setupMore('couple', coupleRest);
+    const tomasShown = new Set(tomas.map(p => p.g));
+    setupMore('tomas', ALL.filter(g => g.t.includes('tomas') && !tomasShown.has(g.f.replace('.webp', ''))));
 
     // mazlíčci – polaroidy se jmény; klik ukáže carousel s jeho fotkami
     const pets = P.pets || [];
