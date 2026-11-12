@@ -47,6 +47,11 @@ const STAY = { yes: 'Ano – chci ubytování', no: 'Ne – pojedu domů', open:
 //  WEB: příjem formuláře
 // ============================================================
 function doPost(e) {
+  if (!e || !e.postData) {
+    // Spuštěno ručně z editoru – doPost volá jen web při odeslání formuláře.
+    throw new Error('doPost nespouštějte ručně – volá ji web při odeslání formuláře. ' +
+      'Pro vyzkoušení vyberte nahoře funkci „testRsvp“ a klikněte na Spustit.');
+  }
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
@@ -66,6 +71,27 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/**
+ * Zkušební RSVP – spusťte z editoru (vyberte „testRsvp“ → Spustit).
+ * Do listu RSVP přidá řádek „TEST“ s vaším e-mailem a pošle vám potvrzovací e-mail.
+ * Řádek pak v tabulce klidně smažte.
+ */
+function testRsvp() {
+  const res = doPost({ postData: { contents: JSON.stringify({
+    name: 'TEST Testovací host',
+    email: CONFIG.COUPLE_EMAIL,
+    attendance: 'plus',
+    companions: 1,
+    companionNames: 'Testovací doprovod',
+    accommodation: 'tent',
+    song1: 'Testovací písnička 1',
+    song2: 'Testovací písnička 2',
+    diet: '',
+    message: 'Tohle je test z editoru Apps Script.',
+  }) } });
+  console.log(res.getContent());
 }
 
 function doGet() {
