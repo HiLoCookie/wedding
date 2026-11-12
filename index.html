@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
   <div class="petals" aria-hidden="true"></div>
@@ -248,10 +248,11 @@
     <p class="muted small">ありがとう – děkujeme!</p>
   </footer>
 
-  <script src="assets/qrcode.js?v=6"></script>
-  <script src="config.js?v=6"></script>
-  <script src="gallery-data.js?v=6"></script>
-  <script src="lightbox.js?v=6"></script>
-  <script src="app.js?v=6"></script>
+  <script src="assets/qrcode.js?v=7"></script>
+  <!-- config.js se načítá vždy čerstvý (upravujete ho na GitHubu a nesmí zůstat ve staré cache) -->
+  <script>document.write('<script src="config.js?t=' + Date.now() + '"><\/script>');</script>
+  <script src="gallery-data.js?v=7"></script>
+  <script src="lightbox.js?v=7"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
